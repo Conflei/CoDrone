@@ -1,0 +1,26 @@
+#include <CoDrone.h>
+byte modeTime = 1;
+int delayTime = 2000;
+void setup()
+{
+  CoDrone.begin(115200);
+  CoDrone.AutoConnect(ConnectedDrone);
+}
+void loop()
+{
+  CoDrone.LedColor(ArmDimming, Green, modeTime);
+  delay(delayTime);
+  CoDrone.LedColor(EyeDimming, Yellow, modeTime);
+  delay(delayTime);
+  CoDrone.LedColor(ArmDimming, Yellow, modeTime);
+  delay(delayTime);
+  CoDrone.LedColor(ArmDimming, Red, modeTime);
+  CoDrone.LedColor(EyeDimming, Blue, modeTime);
+  delay(delayTime);
+  CoDrone.LedColor(EyeDimming, Pink, modeTime);
+  CoDrone.LedColor(ArmDimming, Pink, modeTime);
+  delay(delayTime);
+  CoDrone.LedColor(ArmDimming, White, modeTime);
+  CoDrone.LedColor(EyeDimming, White, modeTime);
+  delay(delayTime);
+}
