@@ -1,0 +1,39 @@
+#include <CoDrone.h>
+int volar=0;
+int rotar=0;
+
+void setup()
+{
+    CoDrone.begin(115200);
+    CoDrone.AutoConnect(ConnectedDrone);
+    CoDrone.DroneModeChange(Flight);
+    CoDrone.BattleBegin(FREE_PLAY);
+}       //  Choose a team : TEAM_RED  / TEAM_BLUE /  TEAM_GREEN  / TEAM_YELLOW / FREE_PLAY
+
+void loop()
+{
+  CoDrone.BattleReceive();
+  byte bt1 = digitalRead(11);       // ¦ ? ? ? ? ? ?   Initialize the bottom left IR sensor
+  byte bt4 = digitalRead(14);       // ? ? ? ¦ ? ? ?   Initialize the bottom center IR sensor
+  byte bt8 = digitalRead(18);       // ? ? ? ? ? ? ¦   Initialize the bottom right IR sensor
+
+  if (bt1 && !bt4 && !bt8){
+      CoDrone.FlightEvent(Stop);
+  }
+
+    if(volar<850){
+        YAW = CoDrone.AnalogScaleChange(512);
+        THROTTLE  = CoDrone.AnalogScaleChange(volar);
+        ROLL = CoDrone.AnalogScaleChange(512);
+        PITCH = CoDrone.AnalogScaleChange(512);
+        CoDrone.Control(SEND_INTERVAL);
+        volar++;}
+        else{
+        YAW = CoDrone.AnalogScaleChange(512);
+        THROTTLE  = CoDrone.AnalogScaleChange(850);
+        ROLL = CoDrone.AnalogScaleChange(512);
+        PITCH = CoDrone.AnalogScaleChange(512);
+        CoDrone.Control(SEND_INTERVAL);;
+        volar--;
+    }
+}
