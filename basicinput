@@ -1,0 +1,43 @@
+#include <CoDrone.h>
+int modeTime = 2; // Use 1 if only radio features, 2 to send info to Drone
+
+void setup() {
+
+pinMode(18,INPUT);
+pinMode(17,INPUT);
+pinMode(12,INPUT);
+pinMode(11,INPUT);
+pinMode(14,INPUT);
+pinMode(15,INPUT);
+CoDrone.begin(115200);// Conexión Bluetooth
+CoDrone.AutoConnect(ConnectedDrone); // Connects all the drones, ConnectedDrone is the already used drone if not, use: NearbyDrone
+
+}
+
+void loop() {
+
+    if(digitalRead(18)==1){
+      CoDrone.LedColor(EyeHold, Red, modeTime);
+      CoDrone.LedColor(ArmHold, Red, modeTime);
+      }
+
+    if(digitalRead(17)==1){
+      CoDrone.LedColor(EyeHold, Blue, modeTime);
+      CoDrone.LedColor(ArmHold, Blue, modeTime);
+      }
+
+    if(digitalRead(12)==1){
+      CoDrone.LedColor(EyeHold, Green, modeTime);
+      CoDrone.LedColor(ArmHold, Green, modeTime);
+      }
+
+    if(digitalRead(11)==1){
+      CoDrone.LedColor(EyeHold, Yellow, modeTime);
+      CoDrone.LedColor(ArmHold, Yellow, modeTime);
+      }
+
+      if(digitalRead(14)==1 && digitalRead(15) == 1){
+        CoDrone.LedColor(EyeHold, White, modeTime);
+        CoDrone.LedColor(ArmHold, White, modeTime);
+      }
+}
