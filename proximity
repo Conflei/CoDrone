@@ -1,0 +1,28 @@
+#include <CoDrone.h>
+int led11=11;
+int led12=12;
+int led18=16;
+int modeTime = 2;
+
+void setup() {
+Serial.begin(9600);
+pinMode(19,INPUT);
+pinMode(20,INPUT);
+pinMode(21,INPUT);
+}
+
+void loop() {
+
+  if(analogRead(19)<512){ // Proximity, led11 will turn on when analigRead(19) reaches 512
+    digitalWrite(led11,HIGH);
+    }
+
+  if(analogRead(20)<512){
+    digitalWrite(led12,HIGH);
+    }
+
+  if(analogRead(21)<512){
+    digitalWrite(led18,HIGH);
+  }
+
+}
